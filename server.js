@@ -7,8 +7,6 @@ const app = express();
 app.use(bodyParser.json());
 
 // Apple Pay verification (.well-known)
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 // Tell Express to serve files inside the ".well-known" folder
 app.use("/.well-known", express.static(path.join(__dirname, ".well-known")));
