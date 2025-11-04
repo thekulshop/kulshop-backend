@@ -2,9 +2,6 @@ import express from "express";
 import bodyParser from "body-parser";
 import fetch from "node-fetch";
 import crypto from "crypto";
-import path from "path";
-import { fileURLToPath } from "url";
-
 // Initialize express app
 const app = express();
 app.use(bodyParser.json());
