@@ -2,22 +2,18 @@ import express from "express";
 import bodyParser from "body-parser";
 import fetch from "node-fetch";
 import crypto from "crypto";
-// Initialize express app
+import path from "path";
+import { fileURLToPath } from "url";
+
 const app = express();
 app.use(bodyParser.json());
 
-// Apple Pay verification (.well-known)
-
-// Tell Express to serve files inside the ".well-known" folder
-app.use("/.well-known", express.static(path.join(__dirname, ".well-known")));
-app.use(bodyParser.json());
 // Apple Pay verification
-import path from "path";
-import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 app.use("/.well-known", express.static(path.join(__dirname, ".well-known")));
+
+
 
 // 🔒 Replace this with your real Square Production Access Token
 const SQUARE_ACCESS_TOKEN = "EAAAl7Z-GS40w9TYaA2BpZLtuYN3IsxS3mxsELPclP3Ua4cc9Dk7jb2zkD5EWBUc";
