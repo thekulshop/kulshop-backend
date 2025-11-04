@@ -3,6 +3,15 @@ import bodyParser from "body-parser";
 import fetch from "node-fetch";
 import crypto from "crypto";
 
+// ---- Apple Pay verification (.well-known) setup ----
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Tell Express to serve files inside the ".well-known" folder
+app.use("/.well-known", express.static(path.join(__dirname, ".well-known")));
+
 const app = express();
 app.use(bodyParser.json());
 
