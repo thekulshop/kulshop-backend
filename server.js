@@ -1,0 +1,46 @@
+import express from "express";
+import bodyParser from "body-parser";
+import fetch from "node-fetch";
+import crypto from "crypto";
+
+const app = express();
+app.use(bodyParser.json());
+
+// 🔒 Replace this with your real Square Production Access Token
+const SQUARE_ACCESS_TOKEN = "EAAAEXAMPLE-YOUR-PROD-ACCESS-TOKEN";
+const SQUARE_LOCATION_ID = "LEADGZ7813668";
+
+// This route is called by your front-end checkout
+app.post("/process-payment", async (req, res) => {
+  const { token } = req.body;
+
+  try {
+    const response = await fetch("https://connect.squareup.com/v2/payments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${SQUARE_ACCESS_TOKEN}`,
+      },
+      body: JSON.stringify({
+        idempotency_key: crypto.randomUUID(),
+        source_id: token,
+        amount_money: {
+          amount: 1000, // = $10.00
+          currency: "USD",
+        },
+        location_id: SQUARE_LOCATION_ID,
+      }),
+    });
+
+    const data = await response.json();
+    console.log("✅ Payment result:", data);
+    res.json({ success: true, data });
+  } catch (error) {
+    console.error("🚫 Payment error:", error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+app.listen(3000, () =>
+  console.log("🚀 Server running at http://localhost:3000")
+);
