@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.json());
 
 // 🔒 Replace this with your real Square Production Access Token
-const SQUARE_ACCESS_TOKEN = "EAAAEXAMPLE-YOUR-PROD-ACCESS-TOKEN";
+const SQUARE_ACCESS_TOKEN = "EAAAl7Z-GS40w9TYaA2BpZLtuYN3IsxS3mxsELPclP3Ua4cc9Dk7jb2zkD5EWBUc";
 const SQUARE_LOCATION_ID = "LEADGZ7813668";
 
 // This route is called by your front-end checkout
