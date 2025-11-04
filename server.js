@@ -14,6 +14,13 @@ app.use("/.well-known", express.static(path.join(__dirname, ".well-known")));
 
 const app = express();
 app.use(bodyParser.json());
+// Apple Pay verification
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use("/.well-known", express.static(path.join(__dirname, ".well-known")));
 
 // 🔒 Replace this with your real Square Production Access Token
 const SQUARE_ACCESS_TOKEN = "EAAAl7Z-GS40w9TYaA2BpZLtuYN3IsxS3mxsELPclP3Ua4cc9Dk7jb2zkD5EWBUc";
